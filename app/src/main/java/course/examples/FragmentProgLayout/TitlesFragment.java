@@ -14,7 +14,14 @@ import android.widget.ListView;
 import course.examples.FragmentProgLayout.R;
 
 public class TitlesFragment extends ListFragment {
-	//Extiende de ListFragment, para poder gestionar los eventos de seleccion de la lista.
+	//Extiende de ListFragment, para poder gestionar los eventos de seleccion de una lista.
+
+	//Declararmos el ListSeletionListener, nuestra interfaz.
+	public interface ListSelectionListener {
+		//Con un método onListSelection al que deberá darle código quien implemente la interfaz.
+		public void onListSelection(int index);  //Será llamado para propagar el evento
+		public String[] getTitles();             //Será llamado para obetner la lista de titulos
+	}
 
 	//Declaramos un ListSelectionListener (interface) que lo instanciamos a null
 	//Se instanciará a algo distinto de null cuando alguien implemente la interfaz
@@ -22,16 +29,9 @@ public class TitlesFragment extends ListFragment {
 	//QuoteViewerActivity
 	private ListSelectionListener mListener = null;
 
-	private static final String TAG = "Titles Fragment";
+	private static final String TAG = "Titles Fragment"; //para el log.d
 
-	//Declararmos el ListSeletionListener, nuestra interfaz.
-	public interface ListSelectionListener {
-		//Con un método onListSelection al que deberá darle código el que implemente
-		//la interfaz.
-		public void onListSelection(int index);  //Será llamado para propagar el evento
-		public String[] getTitles();             //Será llamado para obetner la lista de titulos
-	}
-
+	//Por heredar de ListFragment
 	@Override
 	public void onListItemClick(ListView l, View v, int pos, long id) {
 		//Recibimos una selección en la lista
